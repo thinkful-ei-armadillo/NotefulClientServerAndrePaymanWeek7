@@ -10,7 +10,7 @@ const serializeNote = note => ({
   name: xss(note.name),
   content: xss(note.content),
   modified: note.modified,
-  folderId: note.folderId
+  folderid: note.folderid
 });
 
 noteRouter
@@ -24,9 +24,8 @@ noteRouter
       .catch(next);
   })
   .post(bodyParser, (req, res, next) => {
-    const { name, content, folderId } = req.body;
-    const newNote = { name, content, folderId };
-
+    const { name, content, folderid } = req.body;
+    const newNote = { name, content, folderid: Number(folderid) };
     for (const [key, value] of Object.entries(newNote))
       if (value == null)
         return res.status(400).json({
@@ -49,7 +48,7 @@ noteRouter
       .then(note => {
         if (!note) {
           return res.status(404).json({
-            error: { message: 'note doesn\'t exist' }
+            error: { message: "note doesn't exist" }
           });
         }
         res.note = note; // save the article for the next middleware
@@ -70,8 +69,7 @@ noteRouter
   .patch(bodyParser, (req, res, next) => {
     const { name, content, folderId } = req.body;
     const noteToUpdate = { name, content, folderId, modified: 'now()' };
-    const numberOfValues = Object.values(noteToUpdate).filter(Boolean)
-      .length;
+    const numberOfValues = Object.values(noteToUpdate).filter(Boolean).length;
     if (numberOfValues === 0) {
       return res.status(400).json({
         error: {
@@ -80,11 +78,7 @@ noteRouter
       });
     }
 
-    NotesService.updateNote(
-      req.app.get('db'),
-      req.params.id,
-      noteToUpdate
-    )
+    NotesService.updateNote(req.app.get('db'), req.params.id, noteToUpdate)
       .then(numRowsAffected => {
         res.status(204).end();
       })

@@ -8,9 +8,11 @@ export default class MainView extends Component {
 
   notesHtml() {
     let { notes } = this.context;
+    debugger;
     if (this.props.match.params.folderId !== undefined) {
       notes = notes.filter(
-        note => note.folderId === this.props.match.params.folderId
+        note =>
+          Number(note.folderid) === Number(this.props.match.params.folderId)
       );
     }
 

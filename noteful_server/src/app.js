@@ -27,6 +27,7 @@ app.use(cors());
 });*/
 
 app.use('/api/notes', notesRouter);
+app.use('/api/folders', foldersRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response;

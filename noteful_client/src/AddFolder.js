@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import NotefulContext from './NotefulContext';
 import { withRouter } from 'react-router-dom';
 
-
 class AddFolder extends Component {
   static contextType = NotefulContext;
 
@@ -24,7 +23,7 @@ class AddFolder extends Component {
 
   addFolderRequest = (folderName, callback) => {
     let self = this;
-    fetch('http://localhost:9090/folders/', {
+    fetch('http://localhost:8000/api/folders/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

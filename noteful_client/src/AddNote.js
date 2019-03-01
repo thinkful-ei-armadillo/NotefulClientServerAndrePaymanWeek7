@@ -13,7 +13,7 @@ class AddNote extends Component {
   state = {
     name: '',
     validName: false,
-    folderId: 1,
+    folderId: 0,
     validFolder: false,
     validationMessages: 'Please type in a valid name',
     formValid: false
@@ -42,15 +42,17 @@ class AddNote extends Component {
   setFolder = event => {
     const id = event.target.value;
     const { folders } = this.context;
-    folders.find(e => e.id === id)
+    debugger;
+    folders.find(e => Number(e.id) === Number(id))
       ? this.setState(
           { folderId: event.target.value, validFolder: true },
           this.validateForm
         )
-      : this.setState({ folderId: 1, validFolder: false }, this.validateForm);
+      : this.setState({ folderId: 0, validFolder: false }, this.validateForm);
   };
 
   validateForm = () => {
+    debugger;
     this.setState({
       formValid: this.state.validFolder && this.state.validName
     });
@@ -68,7 +70,7 @@ class AddNote extends Component {
 
   addNoteRequest = (noteName, folderId, content, callback) => {
     let self = this;
-    fetch('http://localhost:9090/notes/', {
+    fetch('http://localhost:8000/api/notes/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -77,7 +79,7 @@ class AddNote extends Component {
       body: JSON.stringify({
         name: noteName,
         modified: new Date().toDateString(),
-        folderId,
+        folderid: folderId,
         content
       })
     })
@@ -132,7 +134,7 @@ class AddNote extends Component {
 
           <textarea type="text" name="note-content" ref={this.contentInput} />
           <select value={this.state.folderId} onChange={this.setFolder}>
-            <option key={1} value="1" disabled>
+            <option key={0} value="0" disabled>
               Select A Folder
             </option>
             {this.generateFolderOptions()}

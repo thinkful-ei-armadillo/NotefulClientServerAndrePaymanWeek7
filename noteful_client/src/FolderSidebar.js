@@ -23,9 +23,10 @@ export default class FolderSidebar extends Component {
     if (notes.length <= 0) {
       return <div>Loading...</div>;
     }
-    const folderId = notes.find(e => e.id === this.props.match.params.noteId)
-      .folderId;
-    folder = folders.find(e => e.id === folderId);
+    debugger;
+    const folderId = notes.find(e => e.id == this.props.match.params.noteId)
+      .folderid;
+    folder = folders.find(e => e.id == folderId);
 
     return (
       <div className="folder-sidebar">

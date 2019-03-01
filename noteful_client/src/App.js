@@ -18,7 +18,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const BASE_URL = `http://localhost:9090`;
+    const BASE_URL = `http://localhost:8000/api`;
 
     fetch(BASE_URL + '/folders')
       .then(response => {
@@ -52,13 +52,27 @@ class App extends Component {
     this.setState({ folders: newFolders });
   };
 
+  deleteFolder = folderId => {
+    const newFolders = this.state.folders.filter(
+      folder => folder.id !== folderId
+    );
+    debugger;
+    const newNotes = this.state.notes.filter(note => {
+      return Number(note.folderid) !== Number(folderId);
+    });
+    console.log(newFolders);
+    console.log(newNotes);
+    this.setState({ folders: newFolders, notes: newNotes });
+  };
+
   render() {
     const contextValue = {
       notes: this.state.notes,
       folders: this.state.folders,
       deleteNote: this.deleteNote,
       addFolder: this.addFolder,
-      addNote: this.addNote
+      addNote: this.addNote,
+      deleteFolder: this.deleteFolder
     };
     return (
       <NotefulContext.Provider value={contextValue}>

@@ -8,7 +8,7 @@ class Note extends Component {
 
   deleteNoteRequest = (noteId, callback) => {
     let self = this;
-    fetch('http://localhost:9090/notes/' + noteId, {
+    fetch('http://localhost:8000/api/notes/' + noteId, {
       method: 'DELETE'
     })
       .then(res => {
@@ -19,7 +19,6 @@ class Note extends Component {
             throw error;
           });
         }
-        return res.json();
       })
       .then(data => {
         // call the callback when the reqyest is successful
@@ -31,8 +30,6 @@ class Note extends Component {
         console.error(error);
       });
   };
-
-
 
   render() {
     let date = new Date(this.props.date);

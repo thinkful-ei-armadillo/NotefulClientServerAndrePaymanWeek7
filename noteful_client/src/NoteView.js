@@ -15,7 +15,7 @@ export default class NoteView extends Component {
       return <React.Fragment>loading...</React.Fragment>;
     }
 
-    const note = notes.find(e => e.id === this.props.match.params.noteId);
+    const note = notes.find(e => e.id == this.props.match.params.noteId);
 
     return (
       <React.Fragment>
