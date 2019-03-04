@@ -6,7 +6,7 @@ export default class MainSidebar extends Component {
   static contextType = NotefulContext;
 
   deleteFolder = (e, id) => {
-    fetch('http://localhost:8000/api/folders/' + id, {
+    fetch('https://warm-anchorage-35124.herokuapp.com/api/folders/' + id, {
       method: 'DELETE'
     })
       .then(res => {

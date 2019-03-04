@@ -23,7 +23,7 @@ class AddFolder extends Component {
 
   addFolderRequest = (folderName, callback) => {
     let self = this;
-    fetch('http://localhost:8000/api/folders/', {
+    fetch('https://warm-anchorage-35124.herokuapp.com/api/folders/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

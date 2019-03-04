@@ -18,7 +18,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const BASE_URL = `http://localhost:8000/api`;
+    const BASE_URL = `https://warm-anchorage-35124.herokuapp.com/api`;
 
     fetch(BASE_URL + '/folders')
       .then(response => {

@@ -8,7 +8,7 @@ class Note extends Component {
 
   deleteNoteRequest = (noteId, callback) => {
     let self = this;
-    fetch('http://localhost:8000/api/notes/' + noteId, {
+    fetch('https://warm-anchorage-35124.herokuapp.com/api/notes/' + noteId, {
       method: 'DELETE'
     })
       .then(res => {

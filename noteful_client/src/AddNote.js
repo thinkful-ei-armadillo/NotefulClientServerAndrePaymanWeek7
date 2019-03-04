@@ -70,7 +70,7 @@ class AddNote extends Component {
 
   addNoteRequest = (noteName, folderId, content, callback) => {
     let self = this;
-    fetch('http://localhost:8000/api/notes/', {
+    fetch('https://warm-anchorage-35124.herokuapp.com/api/notes/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
